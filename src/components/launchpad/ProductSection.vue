@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Check, Copy, ExternalLink, Image, Smartphone } from '@lucide/vue'
+import { Check, Copy, ExternalLink, FileText, Image, Shield, Smartphone } from '@lucide/vue'
 import type { Component } from 'vue'
 import Badge from '@/components/ui/Badge.vue'
 import Button from '@/components/ui/Button.vue'
@@ -32,6 +32,24 @@ const products: Product[] = [
     url: 'https://play.google.com/store/apps/details?id=com.inteniquetic.tools&hl=en',
     icon: Smartphone,
     highlights: ['PDF / QR / Image / Zip', 'Works offline', 'No account'],
+  },
+  {
+    name: 'PDF Pro X',
+    category: 'Android App',
+    summary:
+      'A powerful PDF manager for your device, built for privacy and security with fast, on-device processing.',
+    url: 'https://play.google.com/store/apps/details?id=tech.otel.pdfprox&hl=en',
+    icon: FileText,
+    highlights: ['On-device PDF tools', 'Privacy & security', 'Fast & lightweight'],
+  },
+  {
+    name: 'ScreenProtectorKit',
+    category: 'iOS Library',
+    summary:
+      'Open-source Swift kit that blocks screenshots and screen recording on privacy-sensitive iOS screens.',
+    url: 'https://github.com/prongbang/ScreenProtectorKit',
+    icon: Shield,
+    highlights: ['SwiftUI & UIKit', 'Apache 2.0', 'Free & open source'],
   },
 ]
 
@@ -79,30 +97,27 @@ async function copy(url: string) {
         <Badge :label="`${products.length} products`" />
       </header>
 
-      <div class="grid gap-4 lg:grid-cols-2">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <article
           v-for="product in products"
           :key="product.url"
           class="group overflow-hidden rounded-3xl border border-white/80 bg-white/90 shadow-[0_18px_46px_-30px_rgba(15,23,42,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_28px_58px_-32px_rgba(16,185,129,0.52)] dark:border-slate-800/80 dark:bg-slate-900/80"
         >
           <div class="flex h-full flex-col gap-5 p-5">
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex min-w-0 items-center gap-3">
-                <div
-                  class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-inner dark:border-emerald-900/80 dark:bg-emerald-950/70 dark:text-emerald-300"
-                >
-                  <component :is="product.icon" :size="26" />
-                </div>
-                <div class="min-w-0">
-                  <h3 class="truncate text-lg font-extrabold tracking-tight text-slate-950 dark:text-white">
-                    {{ product.name }}
-                  </h3>
-                  <p class="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-300">
-                    {{ product.category }}
-                  </p>
-                </div>
+            <div class="flex items-center gap-3">
+              <div
+                class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-inner dark:border-emerald-900/80 dark:bg-emerald-950/70 dark:text-emerald-300"
+              >
+                <component :is="product.icon" :size="26" />
               </div>
-              <Badge label="Product" />
+              <div class="min-w-0">
+                <h3 class="text-lg font-extrabold tracking-tight text-slate-950 dark:text-white">
+                  {{ product.name }}
+                </h3>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-300">
+                  {{ product.category }}
+                </p>
+              </div>
             </div>
 
             <p class="min-h-16 text-sm leading-6 text-slate-600 dark:text-slate-300">{{ product.summary }}</p>
